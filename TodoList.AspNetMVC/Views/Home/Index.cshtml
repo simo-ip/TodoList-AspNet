@@ -1,0 +1,14 @@
+﻿@model ToDoApp.ViewModels.TodoViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Todo list</h2>
+
+@Html.Partial("Add", Model.Entity)
+<hr />
+@foreach (var item in Model.List)
+{
+    @Html.Partial("Edit",item)
+}

@@ -1,0 +1,23 @@
+﻿@model DataAccess.Entities.Todo
+
+@{
+    string errorMsg = ViewData["errorMsg"] != null ? ViewData["errorMsg"].ToString() : "";
+}
+
+<div class="text-center">
+    <h1>To-Do <small>List</small></h1>
+    @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        @Html.AntiForgeryToken()
+        <form asp-action="Create" class="form-inline">
+            @Html.ValidationSummary(true, errorMsg, new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter task" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Create" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    }
+</div>

@@ -1,0 +1,44 @@
+﻿@model ToDoApp.ViewModels.TodoViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("Add", Model.Entity)
+<hr />
+@foreach (var item in Model.List)
+{
+    @Html.Partial("Edit", item)
+}
+
+<div class="text-center">
+    <nav>
+        <ul class="pagination">
+            @{
+                if (ViewBag.CurrentPage > 1)
+                {
+                    <li class="page-item"><a class="page-link peopleList" href="@Url.Action("List", new { id = ViewBag.CurrentPage - 1 })">Previous</a></li>
+                }
+
+                for (int i = 1; i <= ViewBag.Pages; i++)
+                {
+                    if (i == ViewBag.CurrentPage)
+                    {
+                        <li class="page-item active"><span>@i</span></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link peopleList" href="@Url.Action("List", new { id = i })">@i</a></li>
+                    }
+                }
+
+                if (ViewBag.CurrentPage < ViewBag.Pages)
+                {
+                    <li class="page-item"><a class="page-link peopleList" href="@Url.Action("List", new { id = ViewBag.CurrentPage + 1 })">Next</a></li>
+                }
+
+            }
+        </ul>
+    </nav>
+</div>
+
