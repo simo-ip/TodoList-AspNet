@@ -107,13 +107,20 @@
 
         add: function (e) {
             e.preventDefault();
-            if ($("#CreateTodo").valid()) {
 
-                var url = "/api/todo";
-                var todo = $("#CreateTodo").serialize();
-                TodoViewModel.model.add(url, todo)
+            var $form = $(e.target);
+            if ($form.valid()) {
+
+                var url = TodoViewModel.baseApiUrl + "/Create";
+                var formData = TodoViewModel.getFormData($form);
+
+                var data = new Object();
+                data.todoItem = new Object();
+                data.todoItem.Description = formData.Description;
+
+                TodoViewModel.model.add(url, data)
                     .done(function (data) {
-                        TodoViewModel.getData(TodoViewModel.baseApiUrl + 1);
+                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + 1);
                     })
                     .fail(function (xhr, status, error) {
                         $('#errorMsg').text(xhr.responseJSON.Message)
@@ -123,7 +130,7 @@
 
         edit: function (e, data) {
             e.preventDefault();
-
+            debugger;
             var $form = $(e.target);
             if ($form.valid()) {
                 var todo = TodoViewModel.getFormData($form);
@@ -131,7 +138,7 @@
                 var url = TodoViewModel.baseApiUrl + todo.TodoId;
                 TodoViewModel.model.save(url, todo)
                     .done(function (data) {
-                        TodoViewModel.getData(TodoViewModel.baseApiUrl + TodoViewModel.currentPage);
+                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + TodoViewModel.currentPage);
                     })
                     .fail(function (xhr, status, error) {
                         $('#errorMsg').text(xhr.responseJSON.Message)
@@ -142,10 +149,11 @@
 
         delete: function (e) {
             e.preventDefault();
-            var url = TodoViewModel.baseApiUrl + $(this).val();
-            TodoViewModel.model.delete(url)
+            var todoId = $(this).val()
+            var url = TodoViewModel.baseApiUrl + '/Delete';
+            TodoViewModel.model.delete(url, todoId)
                 .done(function (data) {
-                    TodoViewModel.getData(TodoViewModel.baseApiUrl + TodoViewModel.currentPage);
+                    TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + TodoViewModel.currentPage);
                 })
                 .fail(function (xhr, status, error) {
                     $('#errorMsg').text(xhr.responseJSON.Message)
@@ -174,20 +182,29 @@
             return $.ajax({
                 type: "POST",
                 url: url,
-                data: data
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                processData: true,
+                dataType: "json",
+
             });
         },
         save: function (url, data) {
             return $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: url,
                 data: data
             });
         },
-        delete: function (url) {
+        delete: function (url, id) {
             return $.ajax({
-                type: "DELETE",
-                url: url
+                type: "POST",
+                url: url,
+                data: '{"id": "' + id + '"}',
+                contentType: "application/json; charset=utf-8",
+                data: '{"id": "' + id + '"}',
+                processData: true,
+                dataType: "json",
             });
         }
     };

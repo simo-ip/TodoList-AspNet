@@ -20,24 +20,24 @@ namespace AjaxEnabledWCFservice._Server
         //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
         //     and include the following line in the operation body:
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
-        //[OperationContract]
-        public void DoWork()
-        {
-            // Add your operation implementation here
-            return;
-        }
-
         // Add more operations here and mark them with [OperationContract]
-        //[WebGet]
-        //[OperationContract]
-        public string Message()
+
+        public void Create(TodoItem todoItem)
         {
-            return "Hello";
+            ITodoService service = new TodoService();
+            Todo todo = new Todo
+            {
+                Description = todoItem.Description
+            };
+            service.Create(todo);
         }
 
-        
-        //[WebGet]
-        //[OperationContract]
+        public void Delete(int id)
+        {
+            ITodoService service = new TodoService();
+            service.Delete(id);
+        }
+
         public TodoViewModel GetTodo(int page)
         {
             ITodoService service = new TodoService();
@@ -50,6 +50,7 @@ namespace AjaxEnabledWCFservice._Server
 
             TodoViewModel model = new TodoViewModel()
             {
+                CurrentPage = page,
                 Pages = service.GetPageNumber(),
                 TodoList = list
             };
@@ -61,17 +62,17 @@ namespace AjaxEnabledWCFservice._Server
     [ServiceContract]
     public interface ITodoWcfService
     {
-        [WebGet]
         [OperationContract]
-        string Message();
-
-        [WebGet]
-        [OperationContract]
-        void DoWork();
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void Create(TodoItem todoItem);
 
         [WebGet]
         [OperationContract]
         TodoViewModel GetTodo(int page);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void Delete(int id);
 
     }
 
@@ -89,6 +90,8 @@ namespace AjaxEnabledWCFservice._Server
     [DataContract]
     public class TodoViewModel
     {
+        [DataMember]
+        public int CurrentPage { get; set; }
         [DataMember]
         public int Pages { get; set; }
         [DataMember]

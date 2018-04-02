@@ -41,22 +41,6 @@
         <br />
     </div>
 </script>
-<script>
-    var url = 'http://localhost:54558/_Server/TodoService.svc/Message';
 
-    var getData = function (url) {
-        return $.getJSON(url);
-    }
-
-    getData(url)
-        .done(function (data) {
-            $('#todoList').text(data.d);
-            console.log(data);
-        })
-        .fail(function (xhr, status, error) {
-            $('#todoList').text(error.Message)
-        });
-
-</script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="~/Scripts/app/home/TodoList.js"></script>
