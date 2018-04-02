@@ -6,13 +6,13 @@
         model: null,
         validator: null,
         currentPage: 1,
-        baseApiUrl:'http://localhost:54558/_Server/TodoService.svc/GetTodo?page=',
+        baseApiUrl:'http://localhost:54558/_Server/TodoService.svc',
 
         init: function (model) {
 
             this.model = model;
 
-            this.getData(this.baseApiUrl+1);
+            this.getData(this.baseApiUrl + '/GetTodo?page=' +1);
 
             this.initValidation();
 
@@ -23,7 +23,7 @@
         onHashChange() {
             var route = window.location.hash.replace('#', '') || 'index';
             if ($.isNumeric(route)) {
-                TodoViewModel.getData(TodoViewModel.baseApiUrl + route);
+                TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + route);
             }
         },
 
@@ -70,8 +70,8 @@
 
             $(".pagination a").click(function (event) {
                 //event.preventDefault();           
-                var uri = $(event.target).data('uri');
-                TodoViewModel.getData(uri);
+                //var uri = $(event.target).data('uri');
+                //TodoViewModel.getData(uri);
             });
 
             $(".deleteButton").on("click", this.delete);
@@ -205,23 +205,22 @@
     Pagination = {
         render: function (data) {
             $('.pagination').empty();
-            if (data.CurrentPage === 1) {
+            if (data.CurrentPage == 1) {
                 $('.pagination').append('<li><span class="disabled">First page</span></li>');
             } else {
-                $('.pagination').append('<li><a href="#1" data-uri="/api/todo/1">First page</a></li>');
+                $('.pagination').append('<li><a href="#1" data-uri="' + TodoViewModel.baseApiUrl + '/GetTodo?page=' + 1 +'">First page</a></li>');
             }
             for (var i = 1; i <= data.Pages; i++) {
-                var prop = { url: '#' + i, uri: '/api/todo/' + i, caption: i }
-                if (i === data.CurrentPage) {
+                if (i == data.CurrentPage) {
                     $('.pagination').append('<li class="active"><span>' + i + '</span></li>');
                 } else {
-                    $('.pagination').append('<li><a href="#' + i + '" data-uri="/api/todo/' + i + '">' + i + '</a></li>');
+                    $('.pagination').append('<li><a href="#' + i + '" data-uri="' + TodoViewModel.baseApiUrl + '/GetTodo?page=' + i + '">' + i + '</a></li>');
                 }
             }
-            if (data.CurrentPage === data.Pages) {
+            if (data.CurrentPage == data.Pages) {
                 $('.pagination').append('<li><span class="disabled">Last page</span></li>');
             } else {
-                $('.pagination').append('<li><a href="#' + data.Pages + '" data-uri=/api/todo/' + data.Pages + '>Last page</a></li>');
+                $('.pagination').append('<li><a href="#' + data.Pages + '" data-uri=' + TodoViewModel.baseApiUrl + '/GetTodo?page=' + data.Pages + '>Last page</a></li>');
             }
         }
     }
