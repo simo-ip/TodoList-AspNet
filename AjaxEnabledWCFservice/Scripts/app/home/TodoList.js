@@ -6,7 +6,7 @@
         model: null,
         validator: null,
         currentPage: 1,
-        baseApiUrl:'/_Server/TodoService.svc',
+        baseApiUrl:'/_Server/TodoWcfService.svc',
 
         init: function (model) {
 

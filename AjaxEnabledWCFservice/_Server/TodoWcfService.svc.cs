@@ -1,5 +1,5 @@
 ﻿using DataAccess.Entities;
-using Services;
+using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,49 +22,61 @@ namespace AjaxEnabledWCFservice._Server
         //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
         // Add more operations here and mark them with [OperationContract]
 
+        const double PAGE_SIZE = 5;
+
         public void Create(TodoItem todoItem)
         {
-            ITodoService service = new TodoService();
+            ITodoRepository repository = new TodoRepository();
+
             Todo todo = new Todo
             {
                 Description = todoItem.Description
             };
-            service.Create(todo);
+
+            repository.Create(todo);
         }
 
         public void Update(TodoItem todoItem)
         {
-            ITodoService service = new TodoService();
+            ITodoRepository repository = new TodoRepository();
+
             Todo todo = new Todo
             {
                 TodoId = todoItem.TodoId,
                 Description = todoItem.Description,
                 IsDone = todoItem.IsDone
             };
-            service.Update(todo);
+
+            repository.Update(todo);
         }
 
         public void Delete(int id)
         {
-            ITodoService service = new TodoService();
-            service.Delete(id);
+            ITodoRepository repository = new TodoRepository();
+            repository.Delete(id);
         }
 
         public TodoViewModel GetTodo(int page)
         {
-            ITodoService service = new TodoService();
+            ITodoRepository repository = new TodoRepository();
 
-            List<TodoItem> list = service.GetData(page).TodoList.Select(a => new TodoItem {
+            List<Todo> todoList = repository.GetAll()
+                .OrderByDescending(c => c.TodoId).Skip((int)((page - 1) * PAGE_SIZE)).Take((int)PAGE_SIZE).ToList();
+
+            List<TodoItem> todoItemlist = todoList.Select(a => new TodoItem {
                 TodoId = a.TodoId,
                 Description = a.Description,
                 IsDone = a.IsDone
             }).ToList();
 
+            double rowCount = repository.GetAll().Count();
+            int pageCount = (int)Math.Ceiling(rowCount / PAGE_SIZE);
+
             TodoViewModel model = new TodoViewModel()
             {
                 CurrentPage = page,
-                Pages = service.GetPageNumber(),
-                TodoList = list
+                Pages = pageCount,
+                TodoList = todoItemlist
             };
 
             return model;

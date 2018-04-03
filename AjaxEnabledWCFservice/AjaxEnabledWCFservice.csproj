@@ -160,8 +160,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_Server\TodoService.svc.cs">
-      <DependentUpon>TodoService.svc</DependentUpon>
+    <Compile Include="_Server\TodoWcfService.svc.cs">
+      <DependentUpon>TodoWcfService.svc</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +183,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Server\TodoService.svc" />
+    <Content Include="_Server\TodoWcfService.svc" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
@@ -232,10 +232,6 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{afe5bd50-078c-420c-83b3-8fd39f828643}</Project>
       <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{4ef423b1-95b2-4bc9-b7f6-5a2c185a0fd9}</Project>
-      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
