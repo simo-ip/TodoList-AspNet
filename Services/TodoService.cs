@@ -14,6 +14,12 @@ namespace Services
         private readonly ITodoRepository _repository;
         private readonly ITodoListDto _todoList;
 
+        public TodoService()
+        {
+            _repository = new TodoRepository();
+            _todoList = new TodoListDto();
+        }
+
         public TodoService(ITodoRepository repository, ITodoListDto todoList)
         {
             _repository = repository;
