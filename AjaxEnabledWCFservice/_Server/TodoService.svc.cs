@@ -32,6 +32,18 @@ namespace AjaxEnabledWCFservice._Server
             service.Create(todo);
         }
 
+        public void Update(TodoItem todoItem)
+        {
+            ITodoService service = new TodoService();
+            Todo todo = new Todo
+            {
+                TodoId = todoItem.TodoId,
+                Description = todoItem.Description,
+                IsDone = todoItem.IsDone
+            };
+            service.Update(todo);
+        }
+
         public void Delete(int id)
         {
             ITodoService service = new TodoService();
@@ -65,6 +77,10 @@ namespace AjaxEnabledWCFservice._Server
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         void Create(TodoItem todoItem);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        void Update(TodoItem todoItem);
 
         [WebGet]
         [OperationContract]

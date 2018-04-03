@@ -6,7 +6,7 @@
         model: null,
         validator: null,
         currentPage: 1,
-        baseApiUrl:'http://localhost:54558/_Server/TodoService.svc',
+        baseApiUrl:'/_Server/TodoService.svc',
 
         init: function (model) {
 
@@ -130,13 +130,19 @@
 
         edit: function (e, data) {
             e.preventDefault();
-            debugger;
+            
             var $form = $(e.target);
             if ($form.valid()) {
-                var todo = TodoViewModel.getFormData($form);
+                var formData = TodoViewModel.getFormData($form);
 
-                var url = TodoViewModel.baseApiUrl + todo.TodoId;
-                TodoViewModel.model.save(url, todo)
+                var data = new Object();
+                data.todoItem = new Object();
+                data.todoItem.TodoId = formData.TodoId;
+                data.todoItem.Description = formData.Description;
+                data.todoItem.IsDone = formData.IsDone;
+
+                var url = TodoViewModel.baseApiUrl + '/Update';
+                TodoViewModel.model.save(url, data)
                     .done(function (data) {
                         TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + TodoViewModel.currentPage);
                     })
@@ -193,7 +199,10 @@
             return $.ajax({
                 type: "POST",
                 url: url,
-                data: data
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                processData: true,
+                dataType: "json",
             });
         },
         delete: function (url, id) {
