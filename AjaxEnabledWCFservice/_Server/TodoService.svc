@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="AjaxEnabledWCFservice._Server.TodoWcfService" CodeBehind="TodoService.svc.cs" %>
