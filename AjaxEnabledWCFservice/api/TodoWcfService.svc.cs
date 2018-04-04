@@ -52,10 +52,15 @@ namespace AjaxEnabledWCFservice._Server
             return todoItem;
         }
 
-        public void Delete(int id)
+        public bool Delete(string id)
         {
+            int todoId;
+            int.TryParse(id, out todoId);
+
             ITodoRepository repository = new TodoRepository();
-            repository.Delete(id);
+            repository.Delete(todoId);
+
+            return true;
         }
 
         public TodoViewModel GetTodo(string page)
@@ -91,11 +96,11 @@ namespace AjaxEnabledWCFservice._Server
     public interface ITodoWcfService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", UriTemplate = "todo", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         TodoItem Create(TodoItem todoItem);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "PUT", UriTemplate = "todo", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         TodoItem Update(TodoItem todoItem);
 
         [WebInvoke(Method = "GET", UriTemplate = "todo/{page}", ResponseFormat = WebMessageFormat.Json,  BodyStyle = WebMessageBodyStyle.Bare)]
@@ -103,8 +108,8 @@ namespace AjaxEnabledWCFservice._Server
         TodoViewModel GetTodo(string page);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void Delete(int id);
+        [WebInvoke(Method = "DELETE", UriTemplate = "todo", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        bool Delete(string id);
 
     }
 
