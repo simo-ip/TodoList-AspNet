@@ -6,37 +6,36 @@
             <input name="Description" data-bind="value: todoItem.Description" class="form-control" placeholder="Enter task" />
         </div>
         <div class="form-group">
-            <button type="submit" value="Create" class="btn btn-primary">Add</button>
+            <button type="button" data-bind="event: { click: add }" value="Create" class="btn btn-primary">Add</button>
         </div>
         <ul id="validation-errors" class="text-danger list-unstyled"></ul>
     </form>
     <hr />
-    <div id="todoList">
+    <div data-bind="if: loading" id="todoList">
         Loading ...
     </div>
+    <div data-bind="template: { name: 'listitem-template', foreach: todoList }"></div>
     <br />
-    <ul class="pagination">
-
-    </ul>
+    <ul class="pagination"></ul>
 </div>
 
 
-<script type="text/template" data-template="listitem">
+<script type="text/html" id="listitem-template">
     <div class="text-center">
         <form class="editTodo form-inline">
             <div class="text-danger"></div>
-            <input type="hidden" name="TodoId" value="${TodoId}" />
+            <input data-bind="value: TodoId" type="hidden" name="TodoId" />
             <div class="form-group">
                 <div class="checkbox">
-                    <input type="checkbox" name="IsDone" value="${IsDone}" />
+                    <input data-bind="checked: IsDone" type="checkbox" name="IsDone" />
                 </div>
             </div>
             <div class="form-group">
-                <input name="Description" class="form-control" value="${Description}" required/>
+                <input data-bind="value: Description" name="Description" class="form-control" required />
             </div>
             <div class="btn-group">
-                <button type="submit" name="submitButton" value="Save" class="btn btn-success" title="Save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-                <button type="button" value="${TodoId}" class="btn btn-danger deleteButton" title="Delete"><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="button" data-bind="event: { click: $parent.edit }" name="submitButton" value="Save" class="btn btn-success" title="Save"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+                <button type="button" data-bind="event: { click: $parent.delete }" class="btn btn-danger deleteButton" title="Delete"><span class="glyphicon glyphicon-remove"></span></button>
             </div>
             <ul id="validation-errors" class="text-danger list-unstyled"></ul>
         </form>
