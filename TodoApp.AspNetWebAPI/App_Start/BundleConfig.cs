@@ -21,6 +21,9 @@ namespace TodoApp.AspNetWebAPI
                       "~/Scripts/lib/bootstrap.js",
                       "~/Scripts/lib/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                      "~/Scripts/lib/knockout-3.4.2.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

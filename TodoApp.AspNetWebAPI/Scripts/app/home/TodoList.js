@@ -2,13 +2,24 @@
 (function () {
     var TodoViewModel, TodoModel, Pagination, Template;
 
+    TodoItemViewModel = {
+        TodoId: ko.observable(),
+        Description: ko.observable('simo'),
+        IsDone: ko.observable()
+    };
+
     TodoViewModel = {
+        Description: ko.observable(),
+        todoItem: TodoItemViewModel,
+        todoList: ko.observableArray(),
+
         model: null,
         validator: null,
         currentPage: 1,
         baseApiUrl:'/api/todo/',
 
         init: function (model) {
+            ko.applyBindings(TodoViewModel);
 
             this.model = model;
 
@@ -110,7 +121,8 @@
             if ($("#CreateTodo").valid()) {
 
                 var url = "/api/todo";
-                var todo = $("#CreateTodo").serialize();
+                var todo = { Description: TodoViewModel.todoItem.Description () };
+               
                 TodoViewModel.model.add(url, todo)
                     .done(function (data) {
                         TodoViewModel.getData(TodoViewModel.baseApiUrl + 1);

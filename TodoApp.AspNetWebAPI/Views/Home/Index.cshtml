@@ -3,7 +3,7 @@
     <form id="CreateTodo" class="form-inline">
         <div id="errorMsg" class="text-danger list-unstyled"></div>
         <div class="form-group">
-            <input name="Description" class="form-control" placeholder="Enter task" />
+            <input name="Description" data-bind="value: todoItem.Description" class="form-control" placeholder="Enter task" />
         </div>
         <div class="form-group">
             <button type="submit" value="Create" class="btn btn-primary">Add</button>
