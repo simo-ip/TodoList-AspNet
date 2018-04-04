@@ -6,13 +6,13 @@
         model: null,
         validator: null,
         currentPage: 1,
-        baseApiUrl:'/_Server/TodoWcfService.svc',
+        baseApiUrl:'/api/TodoWcfService.svc',
 
         init: function (model) {
 
             this.model = model;
 
-            this.getData(this.baseApiUrl + '/GetTodo?page=' +1);
+            this.getData(this.baseApiUrl + '/todo/' +1);
 
             this.initValidation();
 
@@ -23,7 +23,7 @@
         onHashChange() {
             var route = window.location.hash.replace('#', '') || 'index';
             if ($.isNumeric(route)) {
-                TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + route);
+                TodoViewModel.getData(TodoViewModel.baseApiUrl + '/todo/' + route);
             }
         },
 
@@ -98,7 +98,7 @@
         getData: function (url) {
             TodoViewModel.model.getData(url)
                 .done(function (data) {
-                    TodoViewModel.renderView(data.d);
+                    TodoViewModel.renderView(data);
                 })
                 .fail(function (xhr, status, error) {
                     $('#errorMsg').text(error.Message)
@@ -120,10 +120,10 @@
 
                 TodoViewModel.model.add(url, data)
                     .done(function (data) {
-                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + 1);
+                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/todo/' + 1);
                     })
                     .fail(function (xhr, status, error) {
-                        $('#errorMsg').text(xhr.responseJSON.Message)
+                        $('#errorMsg').text(error)
                     });
             }
         },
@@ -144,7 +144,7 @@
                 var url = TodoViewModel.baseApiUrl + '/Update';
                 TodoViewModel.model.save(url, data)
                     .done(function (data) {
-                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + TodoViewModel.currentPage);
+                        TodoViewModel.getData(TodoViewModel.baseApiUrl + '/todo/' + TodoViewModel.currentPage);
                     })
                     .fail(function (xhr, status, error) {
                         $('#errorMsg').text(xhr.responseJSON.Message)
@@ -159,10 +159,10 @@
             var url = TodoViewModel.baseApiUrl + '/Delete';
             TodoViewModel.model.delete(url, todoId)
                 .done(function (data) {
-                    TodoViewModel.getData(TodoViewModel.baseApiUrl + '/GetTodo?page=' + TodoViewModel.currentPage);
+                    TodoViewModel.getData(TodoViewModel.baseApiUrl + '/todo/' + TodoViewModel.currentPage);
                 })
                 .fail(function (xhr, status, error) {
-                    $('#errorMsg').text(xhr.responseJSON.Message)
+                    $('#errorMsg').text(error)
                 });
         },
 

@@ -24,7 +24,7 @@ namespace AjaxEnabledWCFservice._Server
 
         const double PAGE_SIZE = 5;
 
-        public void Create(TodoItem todoItem)
+        public TodoItem Create(TodoItem todoItem)
         {
             ITodoRepository repository = new TodoRepository();
 
@@ -34,9 +34,10 @@ namespace AjaxEnabledWCFservice._Server
             };
 
             repository.Create(todo);
+            return todoItem;
         }
 
-        public void Update(TodoItem todoItem)
+        public TodoItem Update(TodoItem todoItem)
         {
             ITodoRepository repository = new TodoRepository();
 
@@ -48,6 +49,7 @@ namespace AjaxEnabledWCFservice._Server
             };
 
             repository.Update(todo);
+            return todoItem;
         }
 
         public void Delete(int id)
@@ -56,12 +58,14 @@ namespace AjaxEnabledWCFservice._Server
             repository.Delete(id);
         }
 
-        public TodoViewModel GetTodo(int page)
+        public TodoViewModel GetTodo(string page)
         {
+            int currentPage = 1;
+            int.TryParse(page, out currentPage);
             ITodoRepository repository = new TodoRepository();
 
             List<Todo> todoList = repository.GetAll()
-                .OrderByDescending(c => c.TodoId).Skip((int)((page - 1) * PAGE_SIZE)).Take((int)PAGE_SIZE).ToList();
+                .OrderByDescending(c => c.TodoId).Skip((int)((currentPage - 1) * PAGE_SIZE)).Take((int)PAGE_SIZE).ToList();
 
             List<TodoItem> todoItemlist = todoList.Select(a => new TodoItem {
                 TodoId = a.TodoId,
@@ -74,7 +78,7 @@ namespace AjaxEnabledWCFservice._Server
 
             TodoViewModel model = new TodoViewModel()
             {
-                CurrentPage = page,
+                CurrentPage = currentPage,
                 Pages = pageCount,
                 TodoList = todoItemlist
             };
@@ -88,15 +92,15 @@ namespace AjaxEnabledWCFservice._Server
     {
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void Create(TodoItem todoItem);
+        TodoItem Create(TodoItem todoItem);
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        void Update(TodoItem todoItem);
+        TodoItem Update(TodoItem todoItem);
 
-        [WebGet]
+        [WebInvoke(Method = "GET", UriTemplate = "todo/{page}", ResponseFormat = WebMessageFormat.Json,  BodyStyle = WebMessageBodyStyle.Bare)]
         [OperationContract]
-        TodoViewModel GetTodo(int page);
+        TodoViewModel GetTodo(string page);
 
         [OperationContract]
         [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
