@@ -101,11 +101,12 @@
         },
 
         edit: function (e) {
-            var result = ko.validation.group(TodoItemViewModel, { deep: true });
-            if (!TodoViewModel.todoItem.isValid()) {
-                result.showAllMessages(true);
-                return false;
-            }
+            // TODO
+            //var result = ko.validation.group(TodoItemViewModel, { deep: true });
+            //if (!TodoViewModel.todoList.isValid()) {
+            //    result.showAllMessages(true);
+            //    return false;
+            //}
 
             var todo = e;
             var url = TodoViewModel.baseApiUrl + todo.TodoId;
