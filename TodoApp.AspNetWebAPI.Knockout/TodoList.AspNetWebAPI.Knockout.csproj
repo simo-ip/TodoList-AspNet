@@ -205,8 +205,6 @@
     </Content>
     <Content Include="Scripts\app\home\TodoList.js" />
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -243,9 +241,6 @@
       <Project>{4ef423b1-95b2-4bc9-b7f6-5a2c185a0fd9}</Project>
       <Name>Services</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
