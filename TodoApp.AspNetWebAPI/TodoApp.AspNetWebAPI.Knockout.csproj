@@ -194,37 +194,19 @@
     <Content Include="App_Data\ToDoDatabase_log.ldf">
       <DependentUpon>ToDoDatabase.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\lib\knockout.validation.js" />
+    <Content Include="Scripts\lib\knockout.validation.min.js" />
     <Content Include="Scripts\lib\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\lib\knockout-3.4.2.js" />
-    <Content Include="Scripts\lib\bootstrap.js" />
-    <Content Include="Scripts\lib\bootstrap.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\lib\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\lib\jquery-3.3.1.js" />
-    <Content Include="Scripts\lib\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\lib\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\lib\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\lib\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\lib\jquery-3.3.1.min.map" />
-    <None Include="Scripts\lib\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\lib\jquery.validate.js" />
-    <Content Include="Scripts\lib\jquery.validate.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\app\home\TodoList.js" />
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
-    <Content Include="Scripts\lib\respond.js" />
-    <Content Include="Scripts\lib\respond.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -247,16 +229,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Scripts\lib\knockout.validation.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
@@ -269,7 +245,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\lib\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -289,7 +265,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57913</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

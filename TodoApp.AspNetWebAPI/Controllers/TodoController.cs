@@ -61,7 +61,7 @@ namespace TodoApp.AspNetWebAPI.Controllers
         [ResponseType(typeof(Todo))]
         public IHttpActionResult PostTodo(Todo todo)
         {
-            if (!ModelState.IsValid)
+            if ((todo == null) || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
