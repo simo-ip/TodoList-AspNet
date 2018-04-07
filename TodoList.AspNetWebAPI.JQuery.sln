@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.AspNetWebAPI", "TodoApp.AspNetWebAPI.JQuery\TodoList.AspNetWebAPI.csproj", "{6D8B3152-9D62-404F-9CD5-9604AC430CDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.AspNetWebAPI", "TodoList.AspNetWebAPI.JQuery\TodoList.AspNetWebAPI.csproj", "{6D8B3152-9D62-404F-9CD5-9604AC430CDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{AFE5BD50-078C-420C-83B3-8FD39F828643}"
 EndProject
