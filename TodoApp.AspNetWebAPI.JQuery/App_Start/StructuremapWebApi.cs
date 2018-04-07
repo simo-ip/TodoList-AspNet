@@ -20,7 +20,8 @@ using TodoApp.AspNetWebAPI.DependencyResolution;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(typeof(TodoApp.AspNetWebAPI.App_Start.StructuremapWebApi), "Start")]
 
-namespace TodoApp.AspNetWebAPI.App_Start {
+namespace TodoApp.AspNetWebAPI.App_Start
+{
     public static class StructuremapWebApi {
         public static void Start() {
 			var container = StructuremapMvc.StructureMapDependencyScope.Container;
