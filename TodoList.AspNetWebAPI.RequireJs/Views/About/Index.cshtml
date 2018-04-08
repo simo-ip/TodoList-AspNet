@@ -1,0 +1,25 @@
+﻿@using TodoApp.AspNetWebAPI.Extensions
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>Your application description page.</h3>
+<p>Use this area to provide additional information.</p>
+
+<p>
+    Enter your name? <input data-bind="textInput: name" />
+</p>
+<p>
+    Your name is:
+    <span data-bind="text: name"></span>
+</p>
+<script>
+    require(['/Scripts/main.js'], function () {
+        require(['/About/index', 'domReady']);
+    });
+</script>
+
+@*@section scripts
+{
+    @Html.InitPageMainModule("index")
+}*@
