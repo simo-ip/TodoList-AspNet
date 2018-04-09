@@ -61,6 +61,14 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+# Visual Studio IntelliSense
+- -vsdoc\.js$
+- \.intellisense\.js$
+# jQuery validation plugin (MS bundles this with asp.net mvc)
+- (^|/)jquery([^.]*)\.validate(\.unobtrusive)?\.js$
+- (^|/)jquery([^.]*)\.unobtrusive\-ajax\.js$
+# Knockout
+- (^|/)knockout-(\d+\.){3}(debug\.)?js$
 # Vendored files and directories are excluded from language
 # statistics.
-Scripts/lib/* linguist-vendored
+#Scripts/lib/* linguist-vendored
