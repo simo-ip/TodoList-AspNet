@@ -1,25 +1,25 @@
 ﻿    <div class="text-center">
-        <h1>To-Do <small>List</small></h1>
-        <form id="CreateTodo" class="form-inline">
-            <div data-bind="text: errorMsg" class="text-danger list-unstyled"></div>
-            <div class="form-group">
-                <input name="Description" data-bind="value: todoItem.Description" class="form-control" placeholder="Enter task" />
-            </div>
-            <div class="form-group">
-                <button type="button" data-bind="event: { click: add }" value="Create" class="btn btn-primary">Add</button>
-            </div>
-            <div class="help-block with-errors error">
-                <span data-bind="validationMessage: todoItem.Description"></span>
-            </div>
-        </form>
-        <hr />
-        <div data-bind="if: loading">
-            Loading ...
+    <h1>To-Do <small>List</small></h1>
+    <form id="CreateTodo" class="form-inline">
+        <div data-bind="text: errorMsg" class="text-danger list-unstyled"></div>
+        <div class="form-group">
+            <input name="Description" data-bind="value: todoItem().Description" class="form-control" placeholder="Enter task" />
         </div>
-        @*<div data-bind="template: { name: 'listitem-template', foreach: todoList }"></div>
-        <br />
-        <ul id="pagination" class="pagination"></ul>*@
+        <div class="form-group">
+            <button type="button" data-bind="event: { click: add }" value="Create" class="btn btn-primary">Add</button>
+        </div>
+        <div class="help-block with-errors error">
+            <span data-bind="validationMessage: todoItem().Description"></span>
+        </div>
+    </form>
+    <hr />
+    <div data-bind="if: loading">
+        Loading ...
     </div>
+    <div data-bind="template: { name: 'listitem-template', foreach: todoList }"></div>
+    <br />
+    <ul id="pagination" class="pagination"></ul>
+</div>
 
 
 <script type="text/html" id="listitem-template">
@@ -44,9 +44,8 @@
 </script>
 
 <script>
-    require(['knockout', './home/todoViewModel', 'domReady!'], function (ko, TodoViewModel) {
-        debugger;
+    require(['knockout', 'validation', './home/todoViewModel', 'domReady!'], function (ko, validation, TodoViewModel) {
+        
         TodoViewModel.init();
-        //ko.applyBindings(new contactViewModel());
     });
 </script>

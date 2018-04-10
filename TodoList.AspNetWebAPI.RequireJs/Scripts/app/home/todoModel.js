@@ -1,5 +1,5 @@
 ﻿define([], function () {
-    debugger;
+    
     var TodoModel = {
         getData: function (url) {
             return fetch(url)

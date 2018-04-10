@@ -1,6 +1,6 @@
 ﻿// Main viewmodel class
-define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoModel, TodoItemViewModel) {
-    debugger;
+define(['knockout', 'validation', './todoModel', './todoItemViewModel', './paginationModel'], function (ko, validation, TodoModel, TodoItemViewModel, paginationModel) {
+    
     var TodoViewModel = {
         loading: ko.observable(true),
         errorMsg: ko.observable(),
@@ -12,8 +12,7 @@ define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoMod
         baseApiUrl: '/api/todo/',
 
         init: function () {
-            debugger;
-
+            
             TodoViewModel.model = TodoModel;
 
             var param1 = window.location.hash.split('#')[1];
@@ -47,7 +46,8 @@ define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoMod
             document.getElementById('CreateTodo').reset();
             TodoViewModel.errorMsg('');
             data.baseApiUrl = TodoViewModel.baseApiUrl;
-            //Pagination.render(data);
+            
+            paginationModel.render(data);
         },
 
         getData: function (url) {
@@ -55,9 +55,9 @@ define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoMod
             TodoViewModel.model.getData(url)
                 .then(response => response.json())
                 .then(data => {
-                    //TodoViewModel.renderView(data);
-                    //TodoViewModel.todoList(data.TodoList);
-                    //TodoViewModel.loading(false);
+                    TodoViewModel.renderView(data);
+                    TodoViewModel.todoList(data.TodoList);
+                    TodoViewModel.loading(false);
                 })
                 .catch(error => {
                     TodoViewModel.errorMsg(error);
@@ -66,14 +66,14 @@ define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoMod
         },
 
         add: function (e) {
-            //var result = ko.validation.group(TodoViewModel.todoItem, { deep: true });
-            //if (!TodoViewModel.todoItem.isValid()) {
-            //    result.showAllMessages(true);
-            //    return false;
-            //}
+            var result = ko.validation.group(TodoViewModel.todoItem, { deep: true });
+            if (!TodoViewModel.todoItem.isValid()) {
+                result.showAllMessages(true);
+                return false;
+            }
 
             var url = TodoViewModel.baseApiUrl;
-            var todo = { Description: TodoViewModel.todoItem.Description() };
+            var todo = { Description: TodoViewModel.todoItem().Description() };
 
             TodoViewModel.model.add(url, todo)
                 .then(data => {
@@ -116,11 +116,11 @@ define(['knockout', './todoModel', './todoItemViewModel'], function (ko, TodoMod
 
         initValidation: function () {
             // enable validation
-            //ko.validation.init({
-            //    decorateElement: true,
-            //    errorElementClass: 'err',
-            //    insertMessages: false
-            //});
+            ko.validation.init({
+                decorateElement: true,
+                errorElementClass: 'err',
+                insertMessages: false
+            });
         },
     };
 

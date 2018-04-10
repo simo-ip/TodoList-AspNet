@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
+<h2 data-bind="text: title"></h2>
 <h3>Your contact page.</h3>
 
 <address>
@@ -17,8 +17,6 @@
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
-<p>First name: <input data-bind="value: firstName" /></p>
-<p>First name capitalized: <strong data-bind="text: firstNameCaps"></strong></p>
 <script>
     require(['knockout', './contact/contactViewModel', 'domReady!'], function (ko, contactViewModel) {
         ko.applyBindings(new contactViewModel());

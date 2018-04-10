@@ -1,5 +1,5 @@
-﻿define('pagination', [], function () {
-    var pagination = {
+﻿define([], function () {
+    var paginationModel = {
         render: function (data) {
             var pagination = document.getElementById("pagination");
             var html = '';
@@ -24,5 +24,6 @@
             pagination.innerHTML = html;
         }
     }
-    return pagination;
+
+    return paginationModel;
 });

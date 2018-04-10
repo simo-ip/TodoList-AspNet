@@ -198,8 +198,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\about\aboutViewModel.js" />
     <Content Include="Scripts\app\contact\contactViewModel.js" />
-    <Content Include="Scripts\app\home\httpModel.js" />
-    <Content Include="Scripts\app\home\pagination.js" />
+    <Content Include="Scripts\app\home\paginationModel.js" />
     <Content Include="Scripts\app\home\todoItemViewModel.js" />
     <Content Include="Scripts\app\home\todoViewModel.js" />
     <Content Include="Scripts\app\home\todoModel.js" />
@@ -212,7 +211,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\app\home\TodoList.js" />
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
     <Content Include="Scripts\lib\r.js" />
     <Content Include="Scripts\lib\require.js" />
