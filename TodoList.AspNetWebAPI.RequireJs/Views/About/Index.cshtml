@@ -1,25 +1,16 @@
-﻿@using TodoApp.AspNetWebAPI.Extensions
-@{
+﻿@{
     ViewBag.Title = "About";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>Your application description page.</h3>
 <p>Use this area to provide additional information.</p>
 
-<p>
-    Enter your name? <input data-bind="textInput: name" />
-</p>
-<p>
-    Your name is:
-    <span data-bind="text: name"></span>
-</p>
+<p>First name: <input data-bind="value: firstName" /></p>
+<p>First name capitalized: <strong data-bind="text: firstNameCaps"></strong></p>
+
+
 <script>
-    require(['/Scripts/main.js'], function () {
-        require(['/About/index', 'domReady']);
+    require(['knockout', 'about/aboutViewModel', 'domReady!'], function (ko, aboutViewModel) {
+        ko.applyBindings(new aboutViewModel());
     });
 </script>
-
-@*@section scripts
-{
-    @Html.InitPageMainModule("index")
-}*@

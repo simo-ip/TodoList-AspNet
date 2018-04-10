@@ -184,7 +184,6 @@
     <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapWebApiDependencyScope.cs" />
-    <Compile Include="Extensions\RequireJsHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,13 +196,19 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\about\index.js" />
-    <Content Include="Scripts\app\about\ViewModels\defaultViewModel.js" />
+    <Content Include="Scripts\app\about\aboutViewModel.js" />
+    <Content Include="Scripts\app\contact\contactViewModel.js" />
+    <Content Include="Scripts\app\home\httpModel.js" />
+    <Content Include="Scripts\app\home\pagination.js" />
+    <Content Include="Scripts\app\home\todoItemViewModel.js" />
+    <Content Include="Scripts\app\home\todoViewModel.js" />
+    <Content Include="Scripts\app\home\todoModel.js" />
+    <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\lib\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\lib\knockout-3.4.2.js" />
     <Content Include="Scripts\lib\domReady.js" />
     <Content Include="Scripts\lib\knockout.validation.js" />
     <Content Include="Scripts\lib\knockout.validation.min.js" />
-    <Content Include="Scripts\lib\knockout-3.4.2.debug.js" />
-    <Content Include="Scripts\lib\knockout-3.4.2.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -211,7 +216,6 @@
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
     <Content Include="Scripts\lib\r.js" />
     <Content Include="Scripts\lib\require.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

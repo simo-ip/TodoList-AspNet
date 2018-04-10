@@ -4,13 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/knockout")
-    <script src="~/Scripts/lib/require.js"></script>
+
+    <script>
+        // you can register settings like this before require.js is loaded
+        var require = {
+            baseUrl: '/scripts/app',
+            paths: {
+                knockout: '/scripts/lib/knockout-3.4.2',
+                domReady: '/scripts/lib/domReady'
+            }
+        };
+    </script>
+    <script type="text/javascript" data-main="main.js" src="scripts/lib/require.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
