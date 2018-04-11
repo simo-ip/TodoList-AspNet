@@ -1,6 +1,6 @@
 ﻿define([], function () {
     
-    var TodoModel = {
+    var HttpModel = {
         getData: function (url) {
             return fetch(url)
                 .then(response => response)
@@ -20,13 +20,12 @@
                 redirect: 'follow', // *manual, follow, error
                 referrer: 'no-referrer', // *client, no-referrer
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    return response.json();
-                })
-            //.catch(error => console.log('Error:', error));
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            })
         },
         save: function (url, data) {
             return fetch(url, {
@@ -41,8 +40,7 @@
                 mode: 'cors', // no-cors, cors, *same-origin
                 redirect: 'follow', // *manual, follow, error
                 referrer: 'no-referrer', // *client, no-referrer
-            })
-                .then(response => response)
+            }).then(response => response)
         },
         delete: function (url) {
             return fetch(url, {
@@ -51,5 +49,5 @@
         }
     };
 
-    return TodoModel;
+    return HttpModel;
 });

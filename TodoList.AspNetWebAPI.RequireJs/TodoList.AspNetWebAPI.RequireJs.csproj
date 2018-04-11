@@ -198,10 +198,10 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\about\aboutViewModel.js" />
     <Content Include="Scripts\app\contact\contactViewModel.js" />
-    <Content Include="Scripts\app\home\paginationModel.js" />
+    <Content Include="Scripts\app\common\paginationModel.js" />
     <Content Include="Scripts\app\home\todoItemViewModel.js" />
     <Content Include="Scripts\app\home\todoViewModel.js" />
-    <Content Include="Scripts\app\home\todoModel.js" />
+    <Content Include="Scripts\app\common\httpModel.js" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\lib\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\lib\knockout-3.4.2.js" />

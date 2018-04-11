@@ -1,5 +1,6 @@
 ﻿// Main viewmodel class
-define(['knockout', 'validation', './todoModel', './todoItemViewModel', './paginationModel'], function (ko, validation, TodoModel, TodoItemViewModel, paginationModel) {
+define(['knockout', 'validation', '../common/httpModel', './todoItemViewModel', '../common/paginationModel'],
+    function (ko, validation, TodoModel, TodoItemViewModel, paginationModel) {
     
     var TodoViewModel = {
         loading: ko.observable(true),
