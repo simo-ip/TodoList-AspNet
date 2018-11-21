@@ -71,4 +71,4 @@
 - (^|/)knockout-(\d+\.){3}(debug\.)?js$
 # Vendored files and directories are excluded from language
 # statistics.
-#Scripts/lib/* linguist-vendored
+Scripts/lib/* linguist-vendored
